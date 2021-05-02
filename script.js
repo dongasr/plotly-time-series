@@ -1,20 +1,24 @@
+// Constant variable for storing color hex values
 const lineColors = {
     green: "#44bb66",
     red: "#bb4466",
     blue: "#4466bb"
 }
 
+// Setup Plotly config as a const as we will reuse it for all charts
 const config = {
     displayModeBar: false,
     responsive: true
 }
 
+
+// Variables storing the DOM elements to be used for each of the plots
 const plot1Div = document.getElementById('vis1');
 const plot2Div = document.getElementById('vis2');
 const plot3Div = document.getElementById('vis3');
 
 
-Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv", function(err, rows) {
+Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv", function(rows) {
 
     var trace0 = {
         type: "scatter",
@@ -41,8 +45,6 @@ Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-
         x: unpack(rows, 'Date'),
         y: unpack(rows, 'AAPL.Volume'),
         line: { color: '#17BECF' }
-
-
     }
 
     var trace3 = {
@@ -53,8 +55,8 @@ Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-
         open: unpack(rows, 'AAPL.Open'),
 
         // cutomise colors
-        increasing: { line: { color: 'black' } },
-        decreasing: { line: { color: 'red' } },
+        increasing: { line: { color: lineColors.green } },
+        decreasing: { line: { color: lineColors.red } },
 
         type: 'candlestick',
         xaxis: 'x',
